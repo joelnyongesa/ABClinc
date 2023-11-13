@@ -4,3 +4,6 @@
 
 1. [Mercy Muriithi]('https://github.com/mercy2525')
 2. [Joel Nyongesa]('https://github.com/joelnyongesa)
+
+## Models
+<img src='ABC_Clinic ERD.jpeg' />
