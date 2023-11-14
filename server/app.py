@@ -298,4 +298,5 @@ api.add_resource(Drugs,'/drugs', endpoint='drugs')
 api.add_resource(DrugByID,'/drugs/<int:id>', endpoint='drugs_id')
 api.add_resource(Visits,'/visits', endpoint='visits')
 api.add_resource(VisitsByID, '/visits/<int:id>', endpoint='visits_id')
-#making sure added todev
+
+#making sure added to development branch
