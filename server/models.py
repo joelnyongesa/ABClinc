@@ -27,9 +27,11 @@ class Patient(db.Model,SerializerMixin):
 class Admin(db.Models,SerializerMixin):
     __tablename__ = "admins"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
+
+    # We need to agree on the serialize rules and the relationships
 
     @hybrid_property
     def password_hash(self):
