@@ -1,7 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
+from flask_bcrypt import Bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
+
 
 db=SQLAlchemy()
+bcrypt = Bcrypt()
+
 
 class Patient(db.Model,SerializerMixin):
     __tablename__='patients'
@@ -19,6 +24,30 @@ class Patient(db.Model,SerializerMixin):
 
     serialize_rules=('-appointments.patient',)
 
+class Admin(db.Model,SerializerMixin):
+    __tablename__ = "admins"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False, unique=True)
+    email = db.Column(db.String, nullable=False, unique=True)
+    _password_hash = db.Column(db.String, nullable=False)
+
+    # We need to agree on the serialize rules and the relationships
+    #relationship
+    patient_visits = db.relationship("PatientVisit", backref = "admin")
+
+    serialize_rules = ("-patient_visits.admin",)
+
+    @hybrid_property
+    def password_hash(self):
+        raise ValueError("password hash cannot be viewed")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
+        self._password_hash = password_hash.decode("utf-8")
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
 class Appointment(db.Model,SerializerMixin):
     __tablename__='appointments'
@@ -47,9 +76,10 @@ class PatientVisit(db.Model,SerializerMixin):
 
     #relationship
     appointments=db.relationship('Appointment', backref='patient_visit')
+    admin_id = db.Column(db.Integer, db.ForeignKey("admins.id"))
     # drugs=db.relationship('Drug', backref='patient_visit')
 
-    serialize_rules=('-appointments.patient_visit','-drug.patient_visits',)
+    serialize_rules=('-appointments.patient_visit','-drug.patient_visits','-admin.patient_visits',)
 
     # many patient visits can get one drug prescription,.............
 
