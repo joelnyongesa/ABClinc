@@ -8,6 +8,7 @@ from werkzeug.exceptions import NotFound
 
 
 app=Flask(__name__)
+app.secret_key = "mdkfldjgk15456"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
@@ -18,10 +19,10 @@ db.init_app(app)
 api = Api(app)
 CORS(app, origins="*")
 
-@app.before_request
-def check_if_logged_in():
-    if "admin_id" not in session and request.endpoint not in ["signup", "login"]:
-        return {"error": "unauthorized access"}, 401
+# @app.before_request
+# def check_if_logged_in():
+#     if "admin_id" not in session and request.endpoint not in ["signup", "login", "patients"]:
+#         return {"error": "unauthorized access"}, 401
     
 class CheckSession(Resource):
     def get(self):

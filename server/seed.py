@@ -1,5 +1,5 @@
 from faker import Faker
-from models import db, Appointment, Patient, PatientVisit, Drug
+from models import db, Appointment, Patient, PatientVisit, Drug, Admin
 import random
 
 
@@ -9,6 +9,7 @@ fake = Faker()
 
 with app.app_context():
     print("Deleting existing records...")
+    Admin.query.delete()
     Appointment.query.delete()
     Patient.query.delete()
     PatientVisit.query.delete()
@@ -33,6 +34,17 @@ with app.app_context():
     db.session.add_all(patients)
     db.session.commit()
     print("Done adding patients...")
+
+
+    admins = []
+    for i in range(5):
+        admin=Admin(username = fake.unique.user_name(), email=fake.unique.email(), _password_hash="123")
+
+        admins.append(admin)
+
+    print("Adding admins...")
+    db.session.add_all(admins)
+    db.session.commit()
 
 
     drugs = []
@@ -61,6 +73,7 @@ with app.app_context():
             diagnosis=fake.sentence(10),
             dosage=random.choice(["2X2", "1X3", "3X3", "1X2"]),
             drug=random.choice(drugs),
+            admin = random.choice(admins)
         )
         patient_visits.append(patient_visit)
 

@@ -24,7 +24,7 @@ class Patient(db.Model,SerializerMixin):
 
     serialize_rules=('-appointments.patient',)
 
-class Admin(db.Models,SerializerMixin):
+class Admin(db.Model,SerializerMixin):
     __tablename__ = "admins"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
@@ -32,6 +32,10 @@ class Admin(db.Models,SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
 
     # We need to agree on the serialize rules and the relationships
+    #relationship
+    patient_visits = db.relationship("PatientVisit", backref = "admin")
+
+    serialize_rules = ("-patient_visits.admin",)
 
     @hybrid_property
     def password_hash(self):
@@ -72,9 +76,10 @@ class PatientVisit(db.Model,SerializerMixin):
 
     #relationship
     appointments=db.relationship('Appointment', backref='patient_visit')
+    admin_id = db.Column(db.Integer, db.ForeignKey("admins.id"))
     # drugs=db.relationship('Drug', backref='patient_visit')
 
-    serialize_rules=('-appointments.patient_visit','-drug.patient_visits',)
+    serialize_rules=('-appointments.patient_visit','-drug.patient_visits','-admin.patient_visits',)
 
     # many patient visits can get one drug prescription,.............
 
