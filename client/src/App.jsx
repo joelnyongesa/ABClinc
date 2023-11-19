@@ -1,6 +1,7 @@
 import Home from './components/Home';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import Footer from './components/Footer';
+import ServicesCard from './components/ServicesCard';
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Appointment</button>
       </div>
       <Home />
+      <ServicesCard/>
       <Footer />
     </>
   )
