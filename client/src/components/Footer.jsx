@@ -5,7 +5,8 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 const Footer = () => {
 
     return ( <>
-<div className='footer flex bg-blue-100'>
+<div className='bg-color-tertiary'>
+<div className='footer flex mx-60 p-10'>
     <div className='address w-1/4'>
         <div className='flex'>
             <HealthAndSafetyIcon className='text-blue-500 my-1'/>
@@ -54,7 +55,8 @@ const Footer = () => {
         </div>
     </div>
 </div>
-    <div className="socials flex justify-around bg-blue-500" >
+</div>
+    <div className="socials flex justify-around bg-color-secondary px-10 py-2" >
          <div className="mt-4 text-base text-white font-bold">&copy; ABClinic 2023. All rights reserved.</div>
          <div className='flex items-center justify-around w-1/4'>
             <FaYoutube size={32} color='#FF0000' />
