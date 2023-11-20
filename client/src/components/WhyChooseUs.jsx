@@ -4,6 +4,7 @@ import { CiHospital1 } from "react-icons/ci";
 import { CiStethoscope } from "react-icons/ci";
 
 function WhyChooseUs() {
+    // Why choose us
   return (
     <div className="my-20 flex flex-col">
         <h1 className="text-3xl font-bold mb-5">

@@ -1,7 +1,6 @@
-import { CiHospital1 } from "react-icons/ci";
-
 
 function WhyChooseUsCard({ icon, heading, content}) {
+    // Why choose us
   return (
     <div className="flex flex-row bg-white rounded-lg mr-5 mb-10">
         <div className="w-1/8 px-3 p-0 flex items-center justify-center">
