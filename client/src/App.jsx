@@ -2,6 +2,9 @@ import Home from './components/Home';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import Footer from './components/Footer';
 import ServicesCard from './components/ServicesCard';
+import WhyChooseUs from './components/WhyChooseUs';
+
+
 
 function App() {
   
@@ -24,6 +27,7 @@ function App() {
       </div>
       <Home />
       <ServicesCard/>
+      <WhyChooseUs />
       <Footer />
     </>
   )
