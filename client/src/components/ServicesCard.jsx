@@ -2,7 +2,7 @@ import { servicesList } from './ServicesList';
 
 function ServicesCard() {   
   return (
-    <div className='pb-8'> 
+    <div className='pb-8 bg-color-white' > 
         <h1 className='ml-60 text-3xl font-bold'>
             <span className='border-b-2 pb-3 border-blue-500'> Our Services </span>
         </h1>
